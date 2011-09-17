@@ -1,0 +1,50 @@
+throbber.js
+
+Background: I needed a really nice looking spinner that works on top of images. Even though
+there are quite a few javascript solutions available, none of them looked the way I wanted.
+So I created my own. And it went pretty well, so I github'd and MIT'd it. Demo coming soon.
+
+Throbber uses canvas to create the animation and graphics. It does not fiddle with VML
+for IE, instead you can pass a fallback gif for all browsers that do not support canvas.
+
+It’s a mere 1.2k gzipped & minified
+
+--
+
+Usage:
+
+Creates a throbber with default settings, attaches it to the body and starts spinning:
+new Throbber().appendTo( document.body ).start()
+
+Creates a 20x20 pixels throbber:
+var loader = new Throbber(20);
+loader.start();
+
+Creates a throbbe with options:
+var loader = new Throbber({ size:40, padding: 30 });
+
+--
+
+Methods:
+
+Throbber( opts )      // constructor - intializes a throbber and sets options
+.appendTo( element )  // appends the throbber to any html element
+.start()              // starts spinning
+.stop()               // stops spinning
+.configure( opts )    // sets options
+
+--
+
+Options:
+
+size                  // diameter of loader
+rotationspeed         // rotation speed (1-10)
+clockwise             // direction, set to false for counter clockwise
+color                 // color of the spinner, can be any CSS compatible value
+fade                  // duration of fadein/out when calling .start() and .stop()
+fallback              // a gif fallback for non-supported browsers (IE < 8)
+alpha                 // global alpha (0-1), can be defined using rgba color or as a single option
+fps                   // frames per second
+padding               // diameter of clipped inner area
+strokewidth           // width of the lines
+lines                 // number of lines (~size/2+4)
