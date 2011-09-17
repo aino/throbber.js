@@ -1,5 +1,7 @@
 throbber.js
 
+--
+
 Background: I needed a really nice looking spinner that works on top of images. Even though
 there are quite a few javascript solutions available, none of them looked the way I wanted.
 So I created my own. And it went pretty well, so I github'd and MIT'd it. Demo coming soon.
@@ -20,7 +22,7 @@ Creates a 20x20 pixels throbber:
 var loader = new Throbber(20);
 loader.start();
 
-Creates a throbbe with options:
+Creates a throbber with options:
 var loader = new Throbber({ size:40, padding: 30 });
 
 --
