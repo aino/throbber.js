@@ -56,7 +56,7 @@
         },
 
         // locar vars
-        fade, i, l, ad = 1, rd = -1,
+        fade, i, l, ad, rd,
 
         // draw the frame
         _draw = function( alpha, o, ctx, step ) {
