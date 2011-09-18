@@ -33,6 +33,7 @@ Throbber( opts )      // constructor - intializes a throbber and sets options
 .appendTo( element )  // appends the throbber to any html element
 .start()              // starts spinning
 .stop()               // stops spinning
+.toggle()             // toggles spinning
 .configure( opts )    // sets options
 
 --

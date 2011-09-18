@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Throbber.js</title>
+        <meta charset='utf-8'>
+
+        <link rel="stylesheet" href="sunburst.css">
+        <link rel="stylesheet" href="examples.css">
+        <script src="../throbber.js"></script>
+        <script src="highlight.javascript.js"></script>
+        <script src="examples.js"></script>
+    </head>
+    <body>
+        <div>
+            <h1>throbber.js</h1>
+            <div id="menu">
+                <a href="#options">Docs</a>
+                <a href="http://github.com/aino/throbber.js">Code</a>
+                <a href="http://aino.com">Aino</a>
+            </div>
+            <div id="note"></div>
+            <div id="examples">
+            <div class="example">
+                <h2>Example 01</h2>
+                <p>The most basic form of throbber with default options.</p>
+                <div class="throb" id="t1"></div>
+                <pre><code class="javascript">var throb = new Throbber();
+throb.appendTo( document.getElementById( 't1' ) );
+throb.start();</code></pre>
+            </div>
+            <div class="example">
+                <h2>Example 02</h2>
+                <p>Passing a number will set dimensions and adjust other settings according to it’s size. You can also chain methods.</p>
+                <div class="throb" id="t2"></div>
+                <pre><code class="javascript">new Throbber(20)
+    .appendTo( document.getElementById( 't2' ) )
+    .start();</code></pre>
+            </div>
+            <div class="example">
+                <h2>Example 03</h2>
+                <p>Options are passed in the constructor. Methods can be attached to the throbber that was returned.</p>
+                <div class="throb" id="t3"></div>
+                <button id="b3">Start/Stop</button>
+                <pre><code class="javascript">var throb = new Throbber({
+    color: 'yellow',
+    padding: 30,
+    size: 40,
+    fade: 200,
+    clockwise: false
+}).appendTo( document.getElementById( 't3' ) ).start();
+
+document.getElementById('b3').onclick = function() {
+    throb.toggle();
+};</code></pre>
+            </div>
+            <div class="example" id="ie">
+                <h2>Example 04</h2>
+                <p>Throbber.js uses HTML5 canvas that some older browsers do not support (IE&lt;9).
+                    Throbber.js fails silently when it’s not supported, and you can pass a fallback gif that will be used instead:</p>
+                <div class="throb" id="t4"></div>
+                <button id="b4">Stop</button>
+                <pre><code class="javascript">var throb = new Throbber({
+    size: 32,
+    fade: 1000, // fade duration, will also be applied to the fallback gif
+    fallback: 'ajax-loader.gif',
+    rotationspeed: 0,
+    lines: 14,
+    strokewidth: 1.8,
+    alpha: 0.4 // this will also be applied to the gif
+}).appendTo( document.getElementById( 't4' ) ).start();
+
+document.getElementById('b4').onclick = function() {
+    throb.stop();
+};</code></pre>
+            </div>
+            </div>
+            <div id="options">
+            <div class="example">
+                <h2>Options</h2>
+                <pre><code>size                  // diameter of loader
+rotationspeed         // rotation speed (1-10)
+clockwise             // direction, set to false for counter clockwise
+color                 // color of the spinner, can be any CSS compatible value
+fade                  // duration of fadein/out when calling .start() and .stop()
+fallback              // a gif fallback for non-supported browsers (IE < 8)
+alpha                 // global alpha (0-1), can also be defined using rgba color
+fps                   // frames per second
+padding               // diameter of clipped inner area
+strokewidth           // width of the lines
+lines                 // number of lines</code></pre>
+            </div>
+            </div>
+            <div id="methods">
+            <div class="example">
+                <h2>Methods</h2>
+                <pre><code>Throbber( opts )      // constructor - intializes a throbber and sets options
+.appendTo( element )  // appends the throbber to any html element
+.start()              // starts spinning
+.stop()               // stops spinning
+.toggle()             // toggles spinning
+.configure( opts )    // sets options</code></pre>
+            </div>
+            </div>
+            <div class="footer">
+                <p>Made by <a href="http://aino.com">Aino</a></p>
+            </div>
+        </div>
+        <script>examples();</script>
+    </body>
+</html>

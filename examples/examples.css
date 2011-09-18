@@ -1,0 +1,25 @@
+*{padding:0;margin:0}
+html{background:#334 url(tactile_noise.png)}
+body{font:13px/18px arial, sans-serif;color:#eee}
+a{color:#0a6;text-decoration:none;text-shadow:rgba(0,0,0,.5) -1px -1px 1px;}
+a:hover{color:#dc4}
+body > div{width:600px;margin:20px auto;position:relative}
+h1{letter-spacing:-1px;border-bottom:2px solid #eee;padding-bottom:20px;
+    border-bottom:1px solid #111;text-shadow:rgba(0,0,0,.8) -1px -1px 1px;font:normal 22px/1 courier,georgia,serif}
+#menu{position:absolute;right:0;top:0px}
+#menu a{background:#111;background:rgba(0,0,0,.2);display:inline-block;padding:4px 16px}
+.example,
+#note > div{padding:20px 0;border-bottom:1px solid #111;border-top:1px solid #222}
+#note > div h2{font-size:16px;color:#cccc66}
+#note > div p{color:#884}
+.example h2{font-size:12px;text-transform:uppercase;color:#bbb;text-shadow:#000 -1px -1px 1px;}
+.example p{color:#666;color:rgba(255,255,255,.3);text-shadow:rgba(0,0,0,.5) -1px -1px 1px;}
+.example a{display:block;clear:both}
+.example .throb{margin:10px 0}
+#t3{float:left;margin-right:10px}
+button{background:#000;background:rgba(0,0,0,.3);color:#fff;border:none;
+    padding:8px 16px;border:1px solid #0a0a0a;float:left;margin:15px 0 10px;
+    font-family:arial,sans-serif;color:#aaa;text-shadow:#000 -1px -1px 1px;font-size:13px;cursor:pointer;}
+button:hover{color:#dc4}
+pre code{white-space:pre;font-family:monaco,monospace;background:rgba(0,0,0,.3);font-size:12px;padding:5px 10px;margin-top:10px;line-height:20px}
+.footer{padding:20px 0;border-top:1px solid #222}

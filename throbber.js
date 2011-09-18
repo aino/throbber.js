@@ -94,7 +94,7 @@
                 ctx.save();
                 _restore( ctx, size, false );
 
-                ctx.rotate( -1 * ( 360/o.lines/( 20-o.rotationspeed*2 ) ) * M.PI/180 ); //rotate in origin
+                ctx.rotate( rd * ( 360/o.lines/( 20-o.rotationspeed*2 ) ) * M.PI/180 ); //rotate in origin
                 _restore( ctx, size, true );
             }
         };
@@ -113,11 +113,11 @@
         // default options
         // note that some of these are placeholder and calculated against size if not defined
         this.o = {
-            size: 30,           // diameter of loader
+            size: 34,           // diameter of loader
             rotationspeed: 6,   // rotation speed (1-10)
             clockwise: true,    // direction, set to false for counter clockwise
             color: '#fff',      // color of the spinner, can be any CSS compatible value
-            fade: 400,          // duration of fadein/out when calling .start() and .stop()
+            fade: 300,          // duration of fadein/out when calling .start() and .stop()
             fallback: false,    // a gif fallback for non-supported browsers
             alpha: 1            // global alpha, can be defined using rgba as color or separatly
         };
@@ -191,10 +191,10 @@
                 }
 
                 if ( ie ) {
-                    style.filter = 'alpha(opacity=' + M.min( 100, M.max(0, Math.round( alpha*100 ) ) ) + ')';
+                    style.filter = 'alpha(opacity=' + M.min( o.alpha*100, M.max(0, Math.round( alpha*100 ) ) ) + ')';
                 } else if ( !support && o.fallback ) {
                     style.opacity = alpha;
-                } else {
+                } else if ( support ) {
                     _draw( alpha, o, scope.ctx, step );
                     step = step === 0 ? scope.o.lines : step-1;
                 }
