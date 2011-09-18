@@ -1,5 +1,5 @@
 *{padding:0;margin:0}
-html{background:#334 url(tactile_noise.png)}
+html{background:#334 url(tactile_noise.png) fixed}
 body{font:13px/18px arial, sans-serif;color:#eee}
 a{color:#0a6;text-decoration:none;text-shadow:rgba(0,0,0,.5) -1px -1px 1px;}
 a:hover{color:#dc4}
