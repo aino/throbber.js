@@ -4,7 +4,7 @@
  *
  * Copyright (c) 2011, Aino
  * Licensed under the MIT license.
- * 
+ *
  */
 
 /*global Image, Throbber:true*/
@@ -19,7 +19,7 @@
 
         support = ( 'getContext' in document.createElement('canvas') ),
 
-        extend = function( defaults, obj ) {
+        _extend = function( defaults, obj ) {
             defaults = defaults || {};
             for (var i in obj) {
                 defaults[i] = obj[i];
@@ -130,7 +130,7 @@
 
         */
 
-        // extend options
+        // _extend options
         this.configure( options );
 
         // fade phase
@@ -181,7 +181,7 @@
 
                 if ( scope.phase == 1 ) {
 
-                    // fadein & draw
+                    // fadein
                     alpha += fade;
                     if ( alpha >= 1 ) {
                         scope.phase = 2;
@@ -190,6 +190,8 @@
 
                 if ( ie ) {
                     style.filter = 'alpha(opacity=' + M.min( 100, M.max(0, Math.round( alpha*100 ) ) ) + ')';
+                } else if ( !support && o.fallback ) {
+                    style.opacity = alpha;
                 } else {
                     _draw( alpha, o, scope.ctx, step );
                     step = step === 0 ? scope.o.lines : step-1;
@@ -214,17 +216,17 @@
             return this;
         },
 
-        // extend options and apply calculate meassures
+        // _extend options and apply calculate meassures
         configure: function( options ) {
 
             var o = this.o, color;
 
-            extend(o, options || {});
+            _extend(o, options || {});
 
             color = _getRGB( o.color );
 
             // do some sensible calculations if not defined
-            extend( o, extend({
+            _extend( o, _extend({
                 padding: o.size/2,
                 strokewidth: M.max( 1, M.min( o.size/30, 3 ) ),
                 lines: M.min( 30, o.size/2+4 ),
