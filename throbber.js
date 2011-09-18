@@ -62,12 +62,13 @@
         _draw = function( alpha, o, ctx, step ) {
 
             fade = 1-alpha || 0;
+            ad = 1; rd = -1;
 
             var size = o.size;
 
-            if ( !o.clockwise ) {
-                ad=-1;
-                rd=1;
+            if ( o.clockwise === false ) {
+                ad = -1;
+                rd = 1;
             }
 
             ctx.clearRect(0, 0, size, size);
