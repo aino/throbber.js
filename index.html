@@ -1,1 +1,21 @@
-My GitHub Page
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Throbber.js</title>
+        <meta charset='utf-8'>
+        <style>
+            body,html{background:#222;}
+        </style>
+        <script src="https://raw.github.com/aino/throbber.js/master/throbber.js"></script>
+    </head>
+    <body>
+        <h1>Throbber.js</h1>
+        <div class="example">
+            <div id="t1"></div>
+        </div>
+        <script>
+        var elem = document.getElementById('t1');
+        new Throbber().appendTo( elem ).start();
+        </script>
+    </body>
+</html>
