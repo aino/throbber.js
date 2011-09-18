@@ -12,7 +12,6 @@
 (function( window ) {
 
     var document = window.document,
-        body = document.body,
 
         M = Math,
         setTimeout = window.setTimeout,
@@ -35,13 +34,13 @@
 
             t.style.display = 'none';
             t.style.color = color;
-            body.appendChild( t );
+            document.body.appendChild( t );
 
             rgb = window.getComputedStyle( t, null )
                 .getPropertyValue( 'color' )
                 .replace( /^rgba?\(([^\)]+)\)/,'$1' ).replace( /\s/g, '' ).split(',').splice( 0, 4 );
 
-            body.removeChild( t );
+            document.body.removeChild( t );
             t = null;
 
             return {
