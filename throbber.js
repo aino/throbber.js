@@ -113,7 +113,7 @@
         // default options
         // note that some of these are placeholder and calculated against size if not defined
         this.o = {
-            size: 50,           // diameter of loader
+            size: 30,           // diameter of loader
             rotationspeed: 6,   // rotation speed (1-10)
             clockwise: true,    // direction, set to false for counter clockwise
             color: '#fff',      // color of the spinner, can be any CSS compatible value
