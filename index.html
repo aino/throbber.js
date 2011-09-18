@@ -4,47 +4,68 @@
         <title>Throbber.js</title>
         <meta charset='utf-8'>
         <style>
+            @import 'sunburst.css';
             *{padding:0;margin:0}
-            html{background:url(dark_mosaic.png)}
+            html{background:#334 url(tactile_noise.png)}
             body{font:13px/18px 'helvetica neue', arial, sans-serif;color:#fff}
             body > div{width:960px;margin:20px auto}
             .example{margin:20px 0}
+            pre code{white-space:pre;font-family:monaco,monospace}
         </style>
+        <script src="highlight.javascript.js"></script>
         <script src="https://raw.github.com/aino/throbber.js/master/throbber.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </head>
     <body>
         <div>
             <h1>Throbber.js</h1>
             <div class="example">
+                <h2>Example 01</h2>
+                <p>The most basic form of throbber with default options.</p>
                 <div id="t1"></div>
+                <pre><code class="javascript">
+var throb = new Throbber();
+throb.appendTo( document.getElementById( 't1' ) );
+throb.start();
+                </code></pre>
             </div>
             <div class="example">
+                <h2>Example 02</h2>
+                <p>Passing a number will set dimensions and adjust other settings according to it’s size. You can also chain methods.</p>
                 <div id="t2"></div>
+                <pre><code class="javascript">
+new Throbber(20)
+    .appendTo( document.getElementById( 't2' ) )
+    .start();
+                </code></pre>
             </div>
             <div class="example">
+                <h2>Example 03</h2>
+                <p>Options are passed in the constructor. Methods can be attached to the throbber that was returned.</p>
                 <div id="t3"></div>
+                <button id="b3">Stop</button>
+                <pre><code class="javascript">
+var throb = new Throbber({
+    color: 'yellow',
+    padding: 30,
+    size: 40,
+    clockwise: false
+}).appendTo( document.getElementById( 't3' ) ).start();
+
+document.getElementById('b3').onclick = function() {
+    throb.toggle();
+}
+                </code></pre>
             </div>
             <div class="example">
                 <div id="t4"></div>
             </div>
         </div>
         <script>
-        var get = function(id) {
-            return document.getElementById(id);
+        var codes = document.getElementsByTagName('code');
+        for (var i=0; codes[i]; i++) {
+            eval( codes[i].innerHTML );
         }
-        new Throbber().appendTo( get('t1') ).start();
-        new Throbber(30).appendTo( get('t2') ).start();
-        new Throbber({
-            color: 'yellow',
-            fade: 2000
-        }).appendTo( get('t3') ).start();
-        new Throbber({
-            color: '#c75',
-            animationspeed: 2,
-            fade: 100,
-            size: 40,
-            padding: 30
-        }).appendTo( get('t4') ).start();
         </script>
     </body>
 </html>
