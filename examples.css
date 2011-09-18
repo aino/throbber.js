@@ -14,7 +14,9 @@ h1{letter-spacing:-1px;border-bottom:2px solid #eee;padding-bottom:20px;
 #note > div p{color:#884}
 .example h2{font-size:12px;text-transform:uppercase;color:#bbb;text-shadow:#000 -1px -1px 1px;}
 .example p{color:#666;color:rgba(255,255,255,.3);text-shadow:rgba(0,0,0,.5) -1px -1px 1px;}
+.example p strong{color:#ccc;font-weight:normal}
 .example a{display:block;clear:both}
+.intro a{display:inline}
 .example .throb{margin:10px 0}
 #t3{float:left;margin-right:10px}
 button{background:#000;background:rgba(0,0,0,.3);color:#fff;border:none;
