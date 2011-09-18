@@ -90,11 +90,13 @@
                 _restore( ctx, size, true );
             }
 
-            ctx.save();
-            _restore( ctx, size, false );
+            if ( o.rotationspeed ) {
+                ctx.save();
+                _restore( ctx, size, false );
 
-            ctx.rotate( -1 * ( 360/o.lines/( 20-o.rotationspeed*2 ) ) * M.PI/180 ); //rotate in origin
-            _restore( ctx, size, true );
+                ctx.rotate( -1 * ( 360/o.lines/( 20-o.rotationspeed*2 ) ) * M.PI/180 ); //rotate in origin
+                _restore( ctx, size, true );
+            }
         };
 
 
@@ -259,6 +261,14 @@
         stop: function() {
             this.phase = 3;
             return this;
+        },
+
+        toggle: function() {
+            if ( this.phase == 2 ) {
+                this.stop();
+            } else {
+                this.start();
+            }
         }
     };
 
