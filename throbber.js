@@ -109,7 +109,6 @@
 
     // Throbber constructor
     var Throbber = function( options ) {
-    if (this == window) return;
 
         var elem = this.elem = document.createElement('canvas'),
             scope = this;
