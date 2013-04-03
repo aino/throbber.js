@@ -9,8 +9,15 @@
 
 /*global Image, Throbber:true*/
 
-(function( window ) {
-
+(function (window, factory) {
+    if (typeof exports === "object" && exports) {
+        module.exports = factory; // CommonJS
+    } else if (typeof define === "function" && define.amd) {
+        define(function(){return factory}); // AMD
+    } else {
+        window.Throbber = factory; // <script>
+    }
+}(this, (function () {
     var document = window.document,
 
         M = Math,
@@ -101,7 +108,7 @@
 
 
     // Throbber constructor
-    Throbber = function( options ) {
+    var Throbber = function( options ) {
 
         var elem = this.elem = document.createElement('canvas'),
             scope = this;
@@ -119,7 +126,8 @@
             color: '#fff',      // color of the spinner, can be any CSS compatible value
             fade: 300,          // duration of fadein/out when calling .start() and .stop()
             fallback: false,    // a gif fallback for non-supported browsers
-            alpha: 1            // global alpha, can be defined using rgba as color or separatly
+            alpha: 1,           // global alpha, can be defined using rgba as color or separatly
+            className: ''       // class name for the throbber element
         };
 
         /*
@@ -242,6 +250,9 @@
             // copy the amount of lines into steps
             this.step = o.lines;
 
+            // add the class name to the elem
+            this.elem.className = o.className;
+
             return this;
         },
 
@@ -271,5 +282,7 @@
             }
         }
     };
+    
+    return Throbber;
 
-}( this ));
+}())));
