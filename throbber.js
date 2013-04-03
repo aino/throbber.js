@@ -9,8 +9,15 @@
 
 /*global Image, Throbber:true*/
 
-(function( window ) {
-
+(function (window, factory) {
+    if (typeof exports === "object" && exports) {
+        module.exports = factory; // CommonJS
+    } else if (typeof define === "function" && define.amd) {
+        define(function(){return factory}); // AMD
+    } else {
+        window.Throbber = factory; // <script>
+    }
+}(this, (function () {
     var document = window.document,
 
         M = Math,
@@ -101,7 +108,8 @@
 
 
     // Throbber constructor
-    Throbber = function( options ) {
+    var Throbber = function( options ) {
+    if (this == window) return;
 
         var elem = this.elem = document.createElement('canvas'),
             scope = this;
@@ -271,5 +279,7 @@
             }
         }
     };
+    
+    return Throbber;
 
-}( this ));
+}())));
