@@ -79,7 +79,7 @@
 
                 l = i+step >= o.lines ? i-o.lines+step : i+step;
 
-                ctx.strokeStyle = 'rgba(' + o.color.join(',') + ',' + M.max(0, (l/o.lines - fade) ) + ')';
+                ctx.strokeStyle = 'rgba(' + o.color.join(',') + ',' + M.max(0, (l/(o.lines - fade)) ) + ')';
                 ctx.beginPath();
 
                 ctx.moveTo( size/2, size/2-o.padding/2 );
@@ -241,6 +241,17 @@
 
             // copy the amount of lines into steps
             this.step = o.lines;
+            
+            // double-up for retina screens
+            if (!!window.devicePixelRatio) {
+                // lock element into desired end size
+                this.elem.style.width = o.size + 'px';
+                this.elem.style.height = o.size + 'px';
+
+                o.size *= 2;
+                o.padding *= 2;
+                o.strokewidth *= 2;
+            }
 
             return this;
         },
