@@ -79,7 +79,7 @@
 
                 l = i+step >= o.lines ? i-o.lines+step : i+step;
 
-                ctx.strokeStyle = 'rgba(' + o.color.join(',') + ',' + M.max(0, (l/o.lines - fade) ) + ')';
+                ctx.strokeStyle = 'rgba(' + o.color.join(',') + ',' + M.max(0, (l/(o.lines - fade)) ) + ')';
                 ctx.beginPath();
 
                 ctx.moveTo( size/2, size/2-o.padding/2 );
