@@ -84,7 +84,8 @@
 
                 ctx.moveTo( size/2, size/2-o.padding/2 );
                 ctx.lineTo( size/2, 0 );
-                ctx.stroke( o.strokewidth );
+                ctx.lineWidth = o.strokewidth;
+                ctx.stroke();
                 _restore( ctx, size, false );
                 ctx.rotate( ad * ( 360/o.lines ) * M.PI/180 );
                 _restore( ctx, size, true );
@@ -136,7 +137,6 @@
         this.configure( options );
 
         // fade phase
-        // -1 = init
         // 0 = idle
         // 1 = fadein
         // 2 = running
