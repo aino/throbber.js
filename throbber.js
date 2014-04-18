@@ -248,9 +248,9 @@
                 this.elem.style.width = o.size + 'px';
                 this.elem.style.height = o.size + 'px';
 
-                o.size *= 2;
-                o.padding *= 2;
-                o.strokewidth *= 2;
+                o.size *= window.devicePixelRatio;
+                o.padding *= window.devicePixelRatio;
+                o.strokewidth *= window.devicePixelRatio;
             }
 
             return this;
