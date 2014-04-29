@@ -58,7 +58,8 @@ document.getElementById('b3').onclick = function() {
                 <p>Throbber.js uses HTML5 canvas that some older browsers do not support (IE&lt;9).
                     Throbber.js fails silently when it’s not supported, and you can pass a fallback gif that will be used instead:</p>
                 <div class="throb" id="t4"></div>
-                <button id="b4">Stop</button>
+                <button id="b4-1">Start</button>
+                <button id="b4-2">Stop</button>
                 <pre><code class="javascript">var throb = new Throbber({
     size: 32,
     fade: 1000, // fade duration, will also be applied to the fallback gif
@@ -69,7 +70,10 @@ document.getElementById('b3').onclick = function() {
     alpha: 0.4 // this will also be applied to the gif
 }).appendTo( document.getElementById( 't4' ) ).start();
 
-document.getElementById('b4').onclick = function() {
+document.getElementById('b4-1').onclick = function() {
+    throb.start();
+};
+document.getElementById('b4-2').onclick = function() {
     throb.stop();
 };</code></pre>
             </div>

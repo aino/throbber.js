@@ -79,12 +79,13 @@
 
                 l = i+step >= o.lines ? i-o.lines+step : i+step;
 
-                ctx.strokeStyle = 'rgba(' + o.color.join(',') + ',' + M.max(0, (l/o.lines - fade) ) + ')';
+                ctx.strokeStyle = 'rgba(' + o.color.join(',') + ',' + M.max(0, ((l/o.lines) - fade) ).toFixed(2) + ')';
                 ctx.beginPath();
 
                 ctx.moveTo( size/2, size/2-o.padding/2 );
                 ctx.lineTo( size/2, 0 );
-                ctx.stroke( o.strokewidth );
+                ctx.lineWidth = o.strokewidth;
+                ctx.stroke();
                 _restore( ctx, size, false );
                 ctx.rotate( ad * ( 360/o.lines ) * M.PI/180 );
                 _restore( ctx, size, true );
@@ -136,7 +137,6 @@
         this.configure( options );
 
         // fade phase
-        // -1 = init
         // 0 = idle
         // 1 = fadein
         // 2 = running
@@ -241,6 +241,17 @@
 
             // copy the amount of lines into steps
             this.step = o.lines;
+            
+            // double-up for retina screens
+            if (!!window.devicePixelRatio) {
+                // lock element into desired end size
+                this.elem.style.width = o.size + 'px';
+                this.elem.style.height = o.size + 'px';
+
+                o.size *= window.devicePixelRatio;
+                o.padding *= window.devicePixelRatio;
+                o.strokewidth *= window.devicePixelRatio;
+            }
 
             return this;
         },
