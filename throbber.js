@@ -97,6 +97,7 @@
 
                 ctx.rotate( rd * ( 360/o.lines/( 20-o.rotationspeed*2 ) ) * M.PI/180 ); //rotate in origin
                 _restore( ctx, size, true );
+                ctx.restore();
             }
         };
 
