@@ -14,21 +14,17 @@
         <div>
             <h1>throbber.js</h1>
             <div id="menu">
-                <a href="https://raw.github.com/aino/throbber.js/master/throbber.js">Download</a>
                 <a href="#options">Docs</a>
                 <a href="http://github.com/aino/throbber.js">Code</a>
                 <a href="http://aino.com">Aino</a>
             </div>
             <div id="note"></div>
-            <div class="example intro">
-                <p><strong>throbber.js</strong> is a javascript <a href="http://en.wikipedia.org/wiki/Throbber">Throbber</a>, made using canvas and fully configurable with a gif fallback option.</p>
-            </div>
             <div id="examples">
             <div class="example">
                 <h2>Example 01</h2>
                 <p>The most basic form of throbber with default options.</p>
                 <div class="throb" id="t1"></div>
-                <pre><code class="javascript">var throb = new Throbber();
+                <pre><code class="javascript">var throb = Throbber();
 throb.appendTo( document.getElementById( 't1' ) );
 throb.start();</code></pre>
             </div>
@@ -36,7 +32,7 @@ throb.start();</code></pre>
                 <h2>Example 02</h2>
                 <p>Passing a number will set dimensions and adjust other settings according to it’s size. You can also chain methods.</p>
                 <div class="throb" id="t2"></div>
-                <pre><code class="javascript">new Throbber(20)
+                <pre><code class="javascript">Throbber(20)
     .appendTo( document.getElementById( 't2' ) )
     .start();</code></pre>
             </div>
@@ -45,7 +41,7 @@ throb.start();</code></pre>
                 <p>Options are passed in the constructor. Methods can be attached to the throbber that was returned.</p>
                 <div class="throb" id="t3"></div>
                 <button id="b3">Start/Stop</button>
-                <pre><code class="javascript">var throb = new Throbber({
+                <pre><code class="javascript">var throb = Throbber({
     color: 'yellow',
     padding: 30,
     size: 40,
@@ -62,8 +58,9 @@ document.getElementById('b3').onclick = function() {
                 <p>Throbber.js uses HTML5 canvas that some older browsers do not support (IE&lt;9).
                     Throbber.js fails silently when it’s not supported, and you can pass a fallback gif that will be used instead:</p>
                 <div class="throb" id="t4"></div>
-                <button id="b4">Stop</button>
-                <pre><code class="javascript">var throb = new Throbber({
+                <button id="b4-1">Start</button>
+                <button id="b4-2">Stop</button>
+                <pre><code class="javascript">var throb = Throbber({
     size: 32,
     fade: 1000, // fade duration, will also be applied to the fallback gif
     fallback: 'ajax-loader.gif',
@@ -73,7 +70,10 @@ document.getElementById('b3').onclick = function() {
     alpha: 0.4 // this will also be applied to the gif
 }).appendTo( document.getElementById( 't4' ) ).start();
 
-document.getElementById('b4').onclick = function() {
+document.getElementById('b4-1').onclick = function() {
+    throb.start();
+};
+document.getElementById('b4-2').onclick = function() {
     throb.stop();
 };</code></pre>
             </div>
