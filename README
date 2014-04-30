@@ -4,10 +4,13 @@ throbber.js
 
 Background: I needed a really nice looking spinner that works on top of images. Even though
 there are quite a few javascript solutions available, none of them looked the way I wanted.
-So I created my own. And it went pretty well, so I github'd and MIT'd it. Demo: http://aino.github.io/throbber.js/
+So I created my own. And it went pretty well, so I github'd and MIT'd it. 
 
-Throbber uses canvas and animationFrame to create the animation and graphics. It does not fiddle with VML
-for IE, instead you can pass a fallback gif for all browsers that do not support canvas.
+Demo: http://aino.github.io/throbber.js/
+
+Throbber uses canvas and animationFrame to create the animation and graphics. 
+It does not fiddle with VML for IE, instead you can pass a fallback gif for all browsers 
+that do not support canvas.
 
 It’s a mere 1.2k gzipped & minified
 
