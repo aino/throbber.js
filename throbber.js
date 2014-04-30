@@ -1,15 +1,27 @@
 /**
- * @preserve throbber.js v 0.1 2011-09-18
+ * @preserve throbber.js v 0.0.2 2014-04-30
  * http://aino.com
  *
- * Copyright (c) 2011, Aino
+ * Copyright (c) Aino Aktiebolag
  * Licensed under the MIT license.
  *
  */
 
-/*global Image, Throbber:true*/
+/*global Image, module, define, window */
 
-(function( window ) {
+(function(global, factory) {
+
+    if ( typeof module === "object" && typeof module.exports === "object" ) {
+        module.exports = factory( global );
+    } else if ( typeof define == 'function' && define.amd ) {
+        define( "throbber", [], function() {
+            return factory( global );
+        });
+    } else {
+        global.Throbber = factory( global );
+    }
+
+}(window || this, function( window ) {
 
     var document = window.document,
 
@@ -151,7 +163,7 @@
 
 
     // Throbber constructor
-    Throbber = function( options ) {
+    function Throbber( options ) {
 
         if ( !(this instanceof Throbber )) {
             return new Throbber( options );
@@ -256,7 +268,7 @@
 
         _animate(this.o.fps, this.loop);
 
-    };
+    }
 
     // Throbber prototypes
     Throbber.prototype = {
@@ -337,4 +349,6 @@
         }
     };
 
-}( this ));
+    return Throbber;
+
+}));
