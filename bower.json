@@ -1,0 +1,20 @@
+{
+  "name": "throbber.js",
+  "main": "throbber.js",
+  "version": "0.0.2",
+  "homepage": "https://github.com/aino/throbber.js",
+  "authors": [
+    "Aino <http://aino.com>"
+  ],
+  "description": "Canvas throbber",
+  "keywords": [
+    "loader",
+    "animation",
+    "spinner",
+    "throbber"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*"
+  ]
+}

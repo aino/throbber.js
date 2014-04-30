@@ -14,6 +14,12 @@ that do not support canvas. It adjusts itself for retina resolutions.
 
 It’s a mere 1.2k gzipped & minified
 
+Install using Bower: 
+
+  bower install throbber.js
+
+Or just download the code. No dependencies.
+
 --
 
 Usage:
