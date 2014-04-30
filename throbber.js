@@ -26,6 +26,55 @@
             return defaults;
         },
 
+        _animate = (function() {
+
+            var loops = [];
+            var animating = false;
+
+            var requestFrame = (function(){
+              var r = 'RequestAnimationFrame';
+              return window.requestAnimationFrame || 
+                window['webkit'+r] || 
+                window['moz'+r] || 
+                window['o'+r] || 
+                window['ms'+r] || 
+                function( callback ) {
+                  window.setTimeout(callback, 1000 / 60);
+                };
+            }());
+
+            function tick() {
+
+                requestFrame(tick);
+                var now = +(new Date());
+
+                for(var i=0; i<loops.length; i++) {
+                    var loop = loops[i];
+                    loop.elapsed = now - loop.then;
+                    if (loop.elapsed > loop.fpsInterval) {
+                        loop.then = now - (loop.elapsed % loop.fpsInterval);
+                        loop.fn();
+                    }
+                }
+            }
+
+            return function animate(fps, draw) {
+
+                var now = +(new Date());
+                loops.push({
+                    fpsInterval: 1000/fps,
+                    then: now,
+                    startTime: now,
+                    elapsed: 0,
+                    fn: draw
+                });
+                if ( !animating ) {
+                    animating = true;
+                    tick();
+                }
+            };
+        }()),
+
         // convert any color to RGB array
         _getRGB = function( color ) {
             if ( !support ) { return { rgb:false, alpha:1 }; }
@@ -97,13 +146,16 @@
 
                 ctx.rotate( rd * ( 360/o.lines/( 20-o.rotationspeed*2 ) ) * M.PI/180 ); //rotate in origin
                 _restore( ctx, size, true );
-                ctx.restore();
             }
         };
 
 
     // Throbber constructor
     Throbber = function( options ) {
+
+        if ( !(this instanceof Throbber )) {
+            return new Throbber( options );
+        }
 
         var elem = this.elem = document.createElement('canvas'),
             scope = this;
@@ -199,10 +251,11 @@
                     _draw( alpha, o, scope.ctx, step );
                     step = step === 0 ? scope.o.lines : step-1;
                 }
-
-                window.setTimeout( scope.loop, 1000/o.fps );
             };
         }());
+
+        _animate(this.o.fps, this.loop);
+
     };
 
     // Throbber prototypes

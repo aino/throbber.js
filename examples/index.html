@@ -24,7 +24,7 @@
                 <h2>Example 01</h2>
                 <p>The most basic form of throbber with default options.</p>
                 <div class="throb" id="t1"></div>
-                <pre><code class="javascript">var throb = new Throbber();
+                <pre><code class="javascript">var throb = Throbber();
 throb.appendTo( document.getElementById( 't1' ) );
 throb.start();</code></pre>
             </div>
@@ -32,7 +32,7 @@ throb.start();</code></pre>
                 <h2>Example 02</h2>
                 <p>Passing a number will set dimensions and adjust other settings according to it’s size. You can also chain methods.</p>
                 <div class="throb" id="t2"></div>
-                <pre><code class="javascript">new Throbber(20)
+                <pre><code class="javascript">Throbber(20)
     .appendTo( document.getElementById( 't2' ) )
     .start();</code></pre>
             </div>
@@ -41,7 +41,7 @@ throb.start();</code></pre>
                 <p>Options are passed in the constructor. Methods can be attached to the throbber that was returned.</p>
                 <div class="throb" id="t3"></div>
                 <button id="b3">Start/Stop</button>
-                <pre><code class="javascript">var throb = new Throbber({
+                <pre><code class="javascript">var throb = Throbber({
     color: 'yellow',
     padding: 30,
     size: 40,
@@ -60,7 +60,7 @@ document.getElementById('b3').onclick = function() {
                 <div class="throb" id="t4"></div>
                 <button id="b4-1">Start</button>
                 <button id="b4-2">Stop</button>
-                <pre><code class="javascript">var throb = new Throbber({
+                <pre><code class="javascript">var throb = Throbber({
     size: 32,
     fade: 1000, // fade duration, will also be applied to the fallback gif
     fallback: 'ajax-loader.gif',
