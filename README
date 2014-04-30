@@ -15,16 +15,16 @@ It’s a mere 1.2k gzipped & minified
 
 Usage:
 
-Creates a throbber with default settings, attaches it to the body and starts spinning::
+Creates a throbber with default settings, attaches it to the body and starts spinning:
 
   Throbber().appendTo( document.body ).start()
 
-Creates a 20x20 pixels throbber::
+Creates a 20x20 pixels throbber:
 
   var loader = Throbber(20);
   loader.start();
 
-Creates a throbber with options::
+Creates a throbber with options:
   
   var loader = Throbber({ size:40, padding: 30 });
 
