@@ -341,7 +341,7 @@
         },
 
         toggle: function() {
-            if ( this.phase == 2 ) {
+            if ( this.phase != 3 ) {
                 this.stop();
             } else {
                 this.start();
