@@ -28,6 +28,13 @@
         M = Math,
         setTimeout = window.setTimeout,
 
+        // fade phase
+        // 0 = idle
+        // 1 = fadein
+        // 2 = running
+        // 3 = fadeout
+        phase = 0,
+
         support = ( 'getContext' in document.createElement('canvas') ),
 
         _extend = function( defaults, obj ) {
@@ -41,7 +48,6 @@
         _animate = (function() {
 
             var loops = [];
-            var animating = false;
 
             var requestFrame = (function(){
               var r = 'RequestAnimationFrame';
@@ -57,7 +63,13 @@
 
             function tick() {
 
-                requestFrame(tick);
+                if (phase != 0) { 
+                	requestFrame(tick); 
+                } 
+                else { 
+                	loops = [];
+                	return;
+                }
                 var now = +(new Date());
 
                 for(var i=0; i<loops.length; i++) {
@@ -71,7 +83,6 @@
             }
 
             return function animate(fps, draw) {
-
                 var now = +(new Date());
                 loops.push({
                     fpsInterval: 1000/fps,
@@ -80,10 +91,7 @@
                     elapsed: 0,
                     fn: draw
                 });
-                if ( !animating ) {
-                    animating = true;
-                    tick();
-                }
+                tick();
             };
         }()),
 
@@ -201,13 +209,6 @@
         // _extend options
         this.configure( options );
 
-        // fade phase
-        // 0 = idle
-        // 1 = fadein
-        // 2 = running
-        // 3 = fadeout
-        this.phase = -1;
-
         // references
         if ( support ) {
             this.ctx = elem.getContext('2d');
@@ -236,22 +237,21 @@
             // the canvas loop
             return function() {
 
-                if ( scope.phase == 3 ) {
+                if ( phase == 3 ) {
 
                     // fadeout
                     alpha -= fade;
                     if ( alpha <= 0 ) {
-                        scope.phase = 0;
+                        phase = 0;
                     }
-
                 }
 
-                if ( scope.phase == 1 ) {
+                if ( phase == 1 ) {
 
                     // fadein
                     alpha += fade;
                     if ( alpha >= 1 ) {
-                        scope.phase = 2;
+                        phase = 2;
                     }
                 }
 
@@ -265,9 +265,6 @@
                 }
             };
         }());
-
-        _animate(this.o.fps, this.loop);
-
     }
 
     // Throbber prototypes
@@ -326,25 +323,29 @@
         start: function() {
 
             this.elem.style.display = 'block';
-            if ( this.phase == -1 ) {
-                this.loop();
+            if ( phase == 0 ) {
+            	phase = 1; 
+                _animate(this.o.fps, this.loop);
             }
-            this.phase = 1;
+            else
+            {
+            	phase = 1;
+            }
 
             return this;
         },
 
         // stops the animation
         stop: function() {
-            this.phase = 3;
+            phase = 3;
             return this;
         },
 
         toggle: function() {
-            if ( this.phase == 2 ) {
-                this.stop();
+            if ( phase == 2 ) {
+                return this.stop();
             } else {
-                this.start();
+            	return this.start();
             }
         }
     };
