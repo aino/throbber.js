@@ -1,5 +1,5 @@
 /**
- * @preserve throbber.js v 0.0.2 2014-04-30
+ * @preserve throbber.js v 0.0.3 2015-12-08
  * http://aino.com
  *
  * Copyright (c) Aino Aktiebolag
@@ -45,19 +45,22 @@
 
             var requestFrame = (function(){
               var r = 'RequestAnimationFrame';
-              return window.requestAnimationFrame || 
-                window['webkit'+r] || 
-                window['moz'+r] || 
-                window['o'+r] || 
-                window['ms'+r] || 
+              return window.requestAnimationFrame ||
+                window['webkit'+r] ||
+                window['moz'+r] ||
+                window['o'+r] ||
+                window['ms'+r] ||
                 function( callback ) {
                   window.setTimeout(callback, 1000 / 60);
                 };
             }());
 
             function tick() {
-
-                requestFrame(tick);
+                if (loops.length) {
+                    requestFrame(tick);
+                } else {
+                    animating = false;
+                }
                 var now = +(new Date());
 
                 for(var i=0; i<loops.length; i++) {
@@ -65,7 +68,13 @@
                     loop.elapsed = now - loop.then;
                     if (loop.elapsed > loop.fpsInterval) {
                         loop.then = now - (loop.elapsed % loop.fpsInterval);
-                        loop.fn();
+                        var ret = loop.fn();
+                        if (ret) {
+                            // true-ish return value indicates the animation is
+                            // done. Remove it from the list of loops.
+                            loops.splice(i, 1);
+                            i--;
+                        }
                     }
                 }
             }
@@ -153,7 +162,6 @@
             }
 
             if ( o.rotationspeed ) {
-                ctx.save();
                 _restore( ctx, size, false );
 
                 ctx.rotate( rd * ( 360/o.lines/( 20-o.rotationspeed*2 ) ) * M.PI/180 ); //rotate in origin
@@ -202,11 +210,11 @@
         this.configure( options );
 
         // fade phase
-        // 0 = idle
+        // 0 = stopped
         // 1 = fadein
         // 2 = running
         // 3 = fadeout
-        this.phase = -1;
+        this.phase = 0;
 
         // references
         if ( support ) {
@@ -263,11 +271,10 @@
                     _draw( alpha, o, scope.ctx, step );
                     step = step === 0 ? scope.o.lines : step-1;
                 }
+
+                return (scope.phase == 0);  // stop
             };
         }());
-
-        _animate(this.o.fps, this.loop);
-
     }
 
     // Throbber prototypes
@@ -281,6 +288,13 @@
             this.elem.style.display = 'none';
             elem.appendChild( this.elem );
 
+            return this;
+        },
+
+        // stop the throbber and remove it from the DOM
+        remove: function() {
+            this.elem.parentNode.removeChild(this.elem);
+            this.phase = 0;  // stop loop on next frame
             return this;
         },
 
@@ -307,7 +321,7 @@
 
             // copy the amount of lines into steps
             this.step = o.lines;
-            
+
             // double-up for retina screens
             if (!!window.devicePixelRatio) {
                 // lock element into desired end size
@@ -326,8 +340,8 @@
         start: function() {
 
             this.elem.style.display = 'block';
-            if ( this.phase == -1 ) {
-                this.loop();
+            if ( this.phase == 0 ) {
+                _animate(this.o.fps, this.loop);
             }
             this.phase = 1;
 
@@ -341,7 +355,7 @@
         },
 
         toggle: function() {
-            if ( this.phase == 2 ) {
+            if ( this.phase == 1 || this.phase == 2 ) {
                 this.stop();
             } else {
                 this.start();
